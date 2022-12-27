@@ -1,0 +1,9 @@
+.link-hover:hover {
+    background-image:
+        linear-gradient(to right,
+            rgb(116, 97, 185),
+            rgb(55, 71, 214));
+    border-radius: 10px;
+    text-decoration: none;
+    
+}
