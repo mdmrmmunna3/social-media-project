@@ -3,6 +3,30 @@ import { FcPicture } from "react-icons/fc";
 import { FaRegLaugh } from "react-icons/fa";
 
 const MediaPost = () => {
+
+    const url = `https://api.imgbb.com/1/upload?key=33f018524bf09e09820ff851d3578035`
+    console.log(url)
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        const form = e.target;
+        const post = form.post.value;
+        const media = form.photo_video.value;
+        console.log(post, media)
+
+        // const image = e.image;
+        // const formData = new FormData();
+        // formData.append('image', image)
+        
+        // fetch(url, {
+           
+        // })
+        // .then(res => res.json())
+        // .then(data => console.log(ImageData.data.url))
+
+        form.reset();
+    }
+
     return (
         <section className='grid grid-cols-2'>
 
@@ -25,21 +49,21 @@ const MediaPost = () => {
                     {/* Put this part before </body> tag */}
                     <input type="checkbox" id="my-modal-3" className="modal-toggle" />
                     <div className="modal">
-                        <div className="modal-box relative" style={{ backgroundColor: "rgb(36 37 34)" }}>
+                        <form onSubmit={handleSubmit} className="modal-box relative" style={{ backgroundColor: "rgb(36 37 34)" }}>
                             <label htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                             <h3 className="text-2xl text-white font-bold text-center">Create Post</h3>
                             <div className='text-white flex'>
                                 <img src="https://placeimg.com/80/80/people" className='w-10 rounded-full mr-4' alt="" />
                                 <h3>Name</h3>
                             </div>
-                            <textarea className="textarea  w-full mt-3 text-white text-xl" style={{ backgroundColor: "rgb(36 37 38)" }} placeholder="What's on your mind"></textarea>
+                            <textarea name="post" className="textarea  w-full mt-3 text-white text-xl" style={{ backgroundColor: "rgb(36 37 38)" }} placeholder="What's on your mind"></textarea>
 
                             <div className='mt-6'>
                                 <span className='text-white font-semibold mr-4'>Add to your Post</span>
-                                <input type="file" className="file-input file-input-bordered file-input-info w-full max-w-xs" />
+                                <input type="file" name='photo_video' className="file-input file-input-bordered file-input-info w-full max-w-xs" />
                             </div>
                             <button className='btn w-full mt-2 btn-primary text-red font-bold' >Submit</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
 
