@@ -1,13 +1,33 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const Login = () => {
+    const { logIn } = useContext(AuthContext);
+
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [loginError, setLoginError] = useState('');
 
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
+
+    const handleLogin = (data) => {
+        setLoginError('');
+        logIn(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                toast.success('Login Successfully');
+                navigate(from, { replace: true });
+            })
+            .catch(err => {
+                console.error(err.message);
+                setLoginError(err.message);
+            })
+    }
     return (
         <section
             style={{
@@ -16,7 +36,7 @@ const Login = () => {
             className='h-[800px] flex justify-center items-center'>
             <div className='w-96 p-7 bg-white rounded-lg'>
                 <h2 className='text-2xl font-bold text-center'>Login</h2>
-                <form onSubmit={handleSubmit()}>
+                <form onSubmit={handleSubmit(handleLogin)}>
 
                     <div className="form-control w-full max-w-xs">
                         <label className="label">
@@ -50,7 +70,8 @@ const Login = () => {
                     <input className='btn btn-accent w-full mb-3' value='Login' type="submit" />
                     {/* show error message  */}
                     <div>
-                        {/* {loginError && <p className='text-red-600'>{loginError}</p>} */}
+                        {loginError && <p className='text-red-600'>{loginError}</p>}
+
                     </div>
                 </form>
                 <p className='text-center'>New to Decency Fur ReSale? <Link className='text-secondary' to='/signup'> <br /> Create New Account</Link> </p>

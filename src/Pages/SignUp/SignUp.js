@@ -1,15 +1,61 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { FcGoogle } from "react-icons/fc";
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 const SignUp = () => {
-    const { googleSignup } = useContext(AuthContext);
+    const { googleSignup, createUser, updateUser } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const [signUpError, setSignUpError] = useState('');
+    const navigate = useNavigate();
 
     const handleGoogleSignUp = () => {
-        googleSignup();
+        googleSignup()
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                toast.success('SignUp Successfully');
+            })
+            .catch(err => console.error(err));
+    }
+
+    const imgHostKey = process.env.REACT_APP_imgbb_key;
+
+    const handleSignUp = data => {
+        const name = data.name
+        const image = data.image[0];
+        const formData = new FormData();
+        formData.append('image', image)
+        const url = `https://api.imgbb.com/1/upload?key=${imgHostKey}`
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(ImageData => {
+
+                setSignUpError('');
+                createUser(data.email, data.password)
+                    .then(result => {
+                        const user = result.user;
+                        console.log(user);
+                        updateUser(name, ImageData.data.url)
+                            .then(() => {
+
+                            })
+                            .catch(err => console.error(err))
+                        toast.success('User Create Successfully SignUp');
+                        reset();
+                        navigate('/')
+                    })
+                    .catch(err => {
+                        console.error(err.message);
+                        setSignUpError(err.message);
+                    });
+            })
+
     }
 
     return (
@@ -20,7 +66,7 @@ const SignUp = () => {
             className='h-[800px] flex justify-center items-center'>
             <div className='w-96 p-7 bg-white rounded-lg'>
                 <h2 className='text-2xl font-bold text-center'>Sign Up</h2>
-                <form onSubmit={handleSubmit()}>
+                <form onSubmit={handleSubmit(handleSignUp)}>
 
                     <div className="form-control w-full max-w-xs">
                         <label className="label">
@@ -79,7 +125,7 @@ const SignUp = () => {
 
                     <input className='btn btn-accent w-full my-3 font-bold text-white' value='SignUp' type="submit" />
                     <div>
-                        {/* {signUpError && <p className='text-red-600'>{signUpError}</p>} */}
+                        {signUpError && <p className='text-red-600'>{signUpError}</p>}
                     </div>
                 </form>
                 <p>Already have an account?<Link className='text-secondary' to='/login'>Please Login</Link> </p>
