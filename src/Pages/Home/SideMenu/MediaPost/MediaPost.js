@@ -70,7 +70,7 @@ const MediaPost = () => {
                                 }
                             </div>
 
-
+                            {/* normal form  */}
 
                             {/* <textarea name="post" className="textarea  w-full mt-3 text-white text-xl" style={{ backgroundColor: "rgb(36 37 38)" }} placeholder={`What's on your mind ${user?.displayName}`}></textarea> */}
 
