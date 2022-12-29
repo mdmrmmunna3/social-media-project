@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import mLogo from '../../assets/logo/textM.png'
 import './Navbar.css';
 
 const Navbar = () => {
@@ -43,8 +44,7 @@ const Navbar = () => {
                                 }
                             </ul>
                         </div>
-                        {/* <Link to='/' className='nameTitle text-xl lg:text-3xl ml-1'>Md <span className='text-violet-500'>Mustafijur</span> Rahman <span className='text-violet-500'>Munna</span></Link> */}
-                        {/* <p className='text-black'>hello world</p> */}
+                        <Link to="/"> <img className='w-80' src={mLogo} alt="" /> </Link>
                     </div>
                     <div className="navbar-center hidden lg:flex" >
                         <ul className="menu menu-horizontal px-1 text-white">
