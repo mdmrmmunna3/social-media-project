@@ -24,7 +24,7 @@ const MediaPost = () => {
         // console.log(post)
 
         const textPost = data.textPost;
-        console.log(textPost)
+
         const image = data.image[0];
         const formData = new FormData();
         formData.append('image', image)
@@ -79,7 +79,7 @@ const MediaPost = () => {
     }
 
     return (
-        <section className='grid lg:grid-cols-2'>
+        <section className='grid lg:grid-cols-2 gap-4'>
 
             <div className="card  bg-base-100 shadow-xl ">
                 <div className="card-body">
@@ -148,7 +148,7 @@ const MediaPost = () => {
                 </div>
 
             </div>
-
+                
             <div>
 
             </div>

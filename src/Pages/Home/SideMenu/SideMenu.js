@@ -1,9 +1,10 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import MediaPost from './MediaPost/MediaPost';
 
 const SideMenu = () => {
     return (
-        <section>
+        <section className=''>
             <div className="drawer drawer-mobile">
                 <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col">
@@ -23,12 +24,12 @@ const SideMenu = () => {
 
 
                     </div>
-
                     <MediaPost></MediaPost>
+
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-                    <ul className="menu p-12 w-80 ">
+                    <ul className="menu p-12 w-96 ">
 
                         <li><a>Sidebar Item 1</a></li>
                         <li><a>Sidebar Item 2</a></li>
@@ -38,6 +39,13 @@ const SideMenu = () => {
                 </div>
             </div>
         </section>
+
+
+        // <div>
+        //     <Outlet>
+
+        //     </Outlet>
+        // </div>
     );
 };
 
