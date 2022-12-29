@@ -5,7 +5,8 @@ import { AuthContext } from '../../../../contexts/AuthProvider/AuthProvider';
 import { toast } from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import Loader from '../../../../components/Loader/Loader';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 const MediaPost = () => {
 
@@ -79,9 +80,11 @@ const MediaPost = () => {
     }
 
     return (
-        <section className='grid lg:grid-cols-2 gap-4'>
+        <section>
 
             <div className="card  bg-base-100 shadow-xl ">
+
+
                 <div className="card-body">
                     <div className='flex mb-4'>
                         {
@@ -146,11 +149,6 @@ const MediaPost = () => {
                         </form>
                     </div>
                 </div>
-
-            </div>
-                
-            <div>
-
             </div>
         </section>
     );

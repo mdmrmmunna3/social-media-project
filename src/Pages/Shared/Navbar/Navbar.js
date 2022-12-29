@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
-import mLogo from '../../assets/logo/textM.png'
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import mLogo from '../../../assets/logo/textM.png';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -62,8 +62,8 @@ const Navbar = () => {
                         </ul>
                     </div>
 
-                    <div className="flex-none gap-2 navbar-end">
-                        <div className="form-control">
+                    <div className="navbar-end ">
+                        <div className="form-control w-3/4">
                             <input type="text" placeholder="Search" className="input input-bordered w-full" />
                         </div>
                         <div className="dropdown dropdown-end">
@@ -86,7 +86,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
-            
+
         </section>
     );
 };
