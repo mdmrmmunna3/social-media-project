@@ -4,11 +4,15 @@ import { FaRegLaugh, FaRegUserCircle } from "react-icons/fa";
 import { AuthContext } from '../../../../contexts/AuthProvider/AuthProvider';
 import { toast } from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
+import Loader from '../../../../components/Loader/Loader';
+import {  useNavigate } from 'react-router-dom';
 
 const MediaPost = () => {
 
-    const { user } = useContext(AuthContext);
-    const { handleSubmit, register, formState: { errors } } = useForm();
+    const { user, loading } = useContext(AuthContext);
+    const { handleSubmit, register, formState: { errors }, reset } = useForm();
+
+    const navigate = useNavigate();
 
     const imgHostKey = process.env.REACT_APP_imgbb_key;
 
@@ -19,6 +23,8 @@ const MediaPost = () => {
         // // const image = form.photo_video.value;
         // console.log(post)
 
+        const textPost = data.textPost;
+        console.log(textPost)
         const image = data.image[0];
         const formData = new FormData();
         formData.append('image', image)
@@ -29,21 +35,59 @@ const MediaPost = () => {
         })
             .then(res => res.json())
             .then(ImageData => {
-                console.log(ImageData)
-            })
+                if (ImageData.success) {
+                    const mediaPost = {
+                        mediaText: data?.textPost,
+                        postImage: ImageData?.data?.url,
+                        author: user?.displayName,
+                        authorImg: user?.photoURL,
 
+                    }
+
+                    // save to all post information on database
+                    fetch("http://localhost:5000/postData", {
+                        method: "POST",
+                        headers: {
+                            "content-type": "application/json"
+                        },
+                        body: JSON.stringify(mediaPost)
+                    })
+                        .then(res => res.json())
+                        .then(result => {
+                            // console.log(result);
+
+                        })
+                        .catch(err => {
+                            console.error(err);
+                        })
+
+                    console.log(mediaPost)
+                    toast.success(`${user?.displayName} your post submited successfully`);
+                    reset();
+                }
+
+
+            })
+            .catch(err => {
+                console.error(err);
+            })
+        navigate('/media')
+    }
+
+    if (loading) {
+        return <Loader></Loader>
     }
 
     return (
-        <section className='grid grid-cols-2'>
+        <section className='grid lg:grid-cols-2'>
 
-            <div className="card w-96 bg-base-100 shadow-xl ">
+            <div className="card  bg-base-100 shadow-xl ">
                 <div className="card-body">
-                    <div className='flex'>
+                    <div className='flex mb-4'>
                         {
                             user?.uid ? <img src={user?.photoURL} className='w-12 rounded-full mr-4' alt="" /> : <FaRegUserCircle className='w-10 h-full mr-2'></FaRegUserCircle>
                         }
-                        <label htmlFor="my-modal-3" className="input input-bordered input-info text-stone-500 flex items-center w-full">What's your mind</label>
+                        <label htmlFor="my-modal-3" className="input input-bordered input-info text-stone-500 flex items-center w-full">What's your mind, {user?.displayName}?</label>
                     </div>
                     <hr />
                     <div className='flex justify-between'>
@@ -81,11 +125,11 @@ const MediaPost = () => {
 
                             <textarea
                                 {...register("textPost", {
-                                    required: 'upload your text'
+                                    required: 'Write your text'
                                 })
                                 }
-                                className="textarea  w-full mt-3 text-white text-xl" required style={{ backgroundColor: "rgb(36 37 38)" }} />
-                            {errors.img && <p className='text-red-600'>{errors.img?.message}</p>}
+                                className="textarea  w-full mt-3 text-white text-xl" required style={{ backgroundColor: "rgb(36 37 38)" }} placeholder={`What's on your mind, ${user?.displayName}?`} />
+                            {errors.textPost && <p className='text-red-600'>{errors.textPost?.message}</p>}
 
                             <div className="form-control block mt-6">
                                 <span className='text-white font-semibold mr-4'>Add to your Post</span>
@@ -94,7 +138,7 @@ const MediaPost = () => {
                                         required: 'upload your media'
                                     })
                                     }
-                                    className="file-input file-input-bordered file-input-info w-full max-w-xs" />
+                                    className="file-input file-input-bordered file-input-info w-full max-w-xs" required />
                                 {errors.img && <p className='text-red-600'>{errors.img?.message}</p>}
                             </div>
 
