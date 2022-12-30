@@ -10,19 +10,26 @@ import { useNavigate } from 'react-router-dom';
 
 const MediaPost = () => {
 
-    const { user, loading } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const { handleSubmit, register, formState: { errors }, reset } = useForm();
-
     const navigate = useNavigate();
+
+    const dateTime = () => {
+        const locale = 'en';
+        const currentDate = new Date();
+        // const hour = currentDate.getHours();
+        // const wish = `Good ${(hour < 12 && 'Morning') || (hour < 17 && 'Afternoon') || 'Evening'}, `;
+
+        const time = currentDate.toLocaleTimeString(locale, { hour: 'numeric', hour12: true, minute: 'numeric' });
+        const date = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
+        // console.log(date, time)
+
+        return date, time
+    }
 
     const imgHostKey = process.env.REACT_APP_imgbb_key;
 
     const handleMediaSubmit = data => {
-        // e.preventDefault();
-        // const form = e.target;
-        // const post = form.post.value;
-        // // const image = form.photo_video.value;
-        // console.log(post)
 
         const textPost = data.textPost;
 
@@ -40,9 +47,9 @@ const MediaPost = () => {
                     const mediaPost = {
                         mediaText: data?.textPost,
                         postImage: ImageData?.data?.url,
-                        author: user?.displayName,
+                        authorName: user?.displayName,
                         authorImg: user?.photoURL,
-
+                        postTime: dateTime()
                     }
 
                     // save to all post information on database
@@ -75,9 +82,7 @@ const MediaPost = () => {
         navigate('/media')
     }
 
-    if (loading) {
-        return <Loader></Loader>
-    }
+
 
     return (
         <section>

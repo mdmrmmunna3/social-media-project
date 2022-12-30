@@ -7,6 +7,9 @@ import img3 from '../../../assets/logo/Screenshot (380).png'
 import img4 from '../../../assets/logo/Screenshot (380).png'
 import img5 from '../../../assets/logo/Screenshot (380).png'
 import img6 from '../../../assets/logo/Screenshot (380).png'
+import img7 from '../../../assets/logo/Screenshot (380).png'
+import img8 from '../../../assets/logo/Screenshot (380).png'
+import img9 from '../../../assets/logo/Screenshot (380).png'
 
 // Import Swiper styles
 import "swiper/css";
@@ -40,6 +43,9 @@ const Slider = () => {
                     <SwiperSlide><img src={img4} alt="" /></SwiperSlide>
                     <SwiperSlide><img src={img5} alt="" /></SwiperSlide>
                     <SwiperSlide><img src={img6} alt="" /></SwiperSlide>
+                    <SwiperSlide><img src={img7} alt="" /></SwiperSlide>
+                    <SwiperSlide><img src={img8} alt="" /></SwiperSlide>
+                    <SwiperSlide><img src={img9} alt="" /></SwiperSlide>
                 </Swiper>
             </>
         </div>

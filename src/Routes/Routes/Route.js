@@ -1,5 +1,7 @@
+
 import Main from "../../Layout/Main";
 import Home from "../../Pages/Home/Home/Home";
+
 import Login from "../../Pages/Login/Login";
 import Media from "../../Pages/Media/Media";
 import SignUp from "../../Pages/SignUp/SignUp";
@@ -15,11 +17,13 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Home></Home>
+                element: <Home></Home>,
+                loader: (() => fetch('http://localhost:5000/postData'))
             },
             {
                 path: '/home',
-                element: <Home></Home>
+                element: <Home></Home>,
+                loader: (() => fetch('http://localhost:5000/postData'))
             },
             {
                 path: '/media',
@@ -32,7 +36,10 @@ const router = createBrowserRouter([
             {
                 path: '/signup',
                 element: <SignUp></SignUp>
-            }
+            },
+
+            
+
         ]
     }
 ])

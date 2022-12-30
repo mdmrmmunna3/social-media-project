@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import app from '../../firebase/firebase.config';
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth'
+// import TimePicker from 'react-time-picker';
 
 export const AuthContext = createContext();
 const auth = getAuth(app)
@@ -8,6 +9,9 @@ const auth = getAuth(app)
 const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
+    // const [value, onChange] = useState('10:00');
+    // const current = new Date();
+    // const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
 
     // signup with google 
     const googleProvider = new GoogleAuthProvider();
@@ -56,6 +60,12 @@ const AuthProvider = ({ children }) => {
         });
         return () => unsubsrcibe();
     }, [])
+
+
+    // const dateTime = () => {
+    //     // return <TimePicker onChange={onChange} value={value}></TimePicker>
+    //     return date;
+    // }
 
     const authInfo = {
         user,

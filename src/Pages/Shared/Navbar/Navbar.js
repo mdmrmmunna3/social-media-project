@@ -33,7 +33,7 @@ const Navbar = () => {
                             <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow link-style text-white rounded-box w-52">
                                 <li className='font-bold hover-link'><Link to="/home">Home</Link></li>
                                 <li className='font-bold hover-link'>
-                                    <Link to="/">Media</Link>
+                                    <Link to="/media">Media</Link>
                                 </li>
                                 <li className='font-bold hover-link'><Link to="/">Message</Link></li>
                                 <li className='font-bold hover-link'><Link to="/">About</Link></li>
