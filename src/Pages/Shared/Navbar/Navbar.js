@@ -35,8 +35,7 @@ const Navbar = () => {
                                 <li className='font-bold hover-link'>
                                     <Link to="/media">Media</Link>
                                 </li>
-                                <li className='font-bold hover-link'><Link to="/">Message</Link></li>
-                                <li className='font-bold hover-link'><Link to="/">About</Link></li>
+                                <li className='font-bold hover-link'><Link to="/about">About</Link></li>
                                 {
                                     user?.uid ? <li onClick={userLogOut} className='font-bold hover-link'><Link to="/login">LogOut</Link></li>
                                         :
@@ -52,7 +51,6 @@ const Navbar = () => {
                             <li className='font-bold hover-link' >
                                 <Link to="/media">Media</Link>
                             </li>
-                            <li className='font-bold hover-link'><Link to="/message">Message</Link></li>
                             <li className='font-bold hover-link'><Link to="/about">About</Link></li>
                             {
                                 user?.uid ? <li onClick={userLogOut} className='font-bold hover-link'><Link to="/login">LogOut</Link></li>

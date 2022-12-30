@@ -49,7 +49,9 @@ const MediaPost = () => {
                         postImage: ImageData?.data?.url,
                         authorName: user?.displayName,
                         authorImg: user?.photoURL,
-                        postTime: dateTime()
+                        postTime: dateTime(),
+                        likes: [],
+                        comments: null,
                     }
 
                     // save to all post information on database

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { FaRegThumbsUp } from "react-icons/fa";
 import { IoBookmarkOutline, IoChatboxOutline, IoShareSocialOutline } from "react-icons/io5";
@@ -7,6 +7,29 @@ import { IoBookmarkOutline, IoChatboxOutline, IoShareSocialOutline } from "react
 const UserPostData = () => {
 
     const postedDatas = useLoaderData();
+    const [likeCount, setLikeCount] = useState([]);
+    // const [dislikeCount, setDislikeCount] = useState();
+
+
+    const handleLikeClick = (id) => {
+        // fetch(`http://localhost:5000/postData/${id}`, {
+        //     method: "PUT",
+        //     headers: {
+        //         "content-typee": "application.json"
+        //     },
+        //     body: JSON.stringify({likeCount})
+        // })
+        //     .then(res => res.json())
+        //     .then(result => {
+        //         console.log(result);
+        //         setLikeCount(result)
+        //     })
+        //     .catch(err => {
+        //         console.error(err);
+        //     })
+        console.log("hlw")
+    }
+
 
     return (
         <section className='mt-6'>
@@ -20,17 +43,19 @@ const UserPostData = () => {
                                 <span className="text-sm dark:text-gray-400">{`${postData?.postTime?.time}, ${postData?.postTime?.date}`}</span>
                             </div>
                         </div>
-                        <p>{postData?.mediaText?.slice(0, 20)}... <Link className='text-orange-400 hover:text-orange-600'>Read More</Link> </p>
+                        <p>{postData?.mediaText?.slice(0, 20)}... <Link to={`/postDataDetails/${postData?._id}`} className='text-orange-400 hover:text-orange-600'>Read More</Link> </p>
                         <div>
                             <img src={postData?.postImage} alt="" className="object-cover w-full mb-4 h-60 sm:h-96 dark:bg-gray-500" />
 
                         </div>
                         <div className="flex flex-wrap justify-between">
-                            <div className="space-x-2">
-                                <button aria-label="Share this post" type="button" className="p-2 text-center">
+                            <div className="flex space-x-2 ">
+
+                                <button onClick={() => handleLikeClick(postData?._id)} aria-label="Share this post" type="button" className="p-2 text-center flex items-center">
                                     <FaRegThumbsUp></FaRegThumbsUp>
+                                    <span>{postData?.likes?.length}</span>
                                 </button>
-                                <button aria-label="Bookmark this post" type="button" className="p-2">
+                                <button aria-label="Bookmark this post" type="button" className="p-2 flex items-center">
                                     <IoChatboxOutline></IoChatboxOutline>
                                 </button>
                             </div>
@@ -44,8 +69,9 @@ const UserPostData = () => {
                                 </button>
                             </div>
                         </div>
-                        <div>
-                        <textarea className="textarea textarea-success w-full h-10 text-xl" placeholder="Write an answer..."></textarea>
+                        <div className='flex '>
+                            <input type="text" placeholder="Write an answer..." className="input input-bordered w-full rounded-2xl" />
+                            <button className='btn ml-2'>Comment</button>
                         </div>
                     </div>
                 </div>)

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { HiHome } from "react-icons/hi";
-import { HiComputerDesktop } from "react-icons/hi2";
 import { FaUser } from 'react-icons/fa';
+import { HiHome } from 'react-icons/hi';
+import { HiComputerDesktop } from 'react-icons/hi2';
+import { Link } from 'react-router-dom';
 
-const Media = () => {
+const About = () => {
     return (
         <section className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mx-6 my-5 gap-5'>
             <div className='hidden md:block'>
@@ -13,11 +13,11 @@ const Media = () => {
                 <li className='list-none py-2 rounded-lg pl-4 btn-ghost'> <Link to="/about" className='flex items-center'> <FaUser className='mr-2 text-3xl'></FaUser> About</Link> </li>
             </div>
             <div>
-                <h1>hi</h1>
+                <h1>updating</h1>
             </div>
             <div></div>
         </section>
     );
 };
 
-export default Media;
+export default About;
