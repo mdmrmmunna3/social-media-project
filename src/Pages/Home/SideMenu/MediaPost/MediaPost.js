@@ -55,7 +55,7 @@ const MediaPost = () => {
                     }
 
                     // save to all post information on database
-                    fetch("http://localhost:5000/postData", {
+                    fetch("https://social-media-server-taupe.vercel.app/postData", {
                         method: "POST",
                         headers: {
                             "content-type": "application/json"

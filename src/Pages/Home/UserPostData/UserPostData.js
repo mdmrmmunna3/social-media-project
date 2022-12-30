@@ -12,7 +12,7 @@ const UserPostData = () => {
 
 
     const handleLikeClick = (id) => {
-        // fetch(`http://localhost:5000/postData/${id}`, {
+        // fetch(`https://social-media-server-taupe.vercel.app/postData/${id}`, {
         //     method: "PUT",
         //     headers: {
         //         "content-typee": "application.json"

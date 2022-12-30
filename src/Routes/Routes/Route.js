@@ -21,12 +21,12 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>,
-                loader: (() => fetch('http://localhost:5000/postData'))
+                loader: (() => fetch('https://social-media-server-taupe.vercel.app/postData'))
             },
             {
                 path: '/home',
                 element: <Home></Home>,
-                loader: (() => fetch('http://localhost:5000/postData'))
+                loader: (() => fetch('https://social-media-server-taupe.vercel.app/postData'))
             },
             {
                 path: '/media',
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
             {
                 path: '/postDataDetails/:id',
                 element: <PrivateRoute><UserPostDataDetails></UserPostDataDetails></PrivateRoute>,
-                loader: (({ params }) => fetch(`http://localhost:5000/postData/${params.id}`))
+                loader: (({ params }) => fetch(`https://social-media-server-taupe.vercel.app/postData/${params.id}`))
             }
 
         ]
