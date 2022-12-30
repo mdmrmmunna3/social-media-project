@@ -50,7 +50,7 @@ const SideMenu = () => {
         // </section>
 
 
-        <section className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mx-10 my-5 gap-5'>
+        <section className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mx-6 my-5 gap-5'>
             <div className='hidden md:block'>
                 <li className='list-none py-2 rounded-lg pl-4 btn-ghost'> <Link className='flex items-center'> <HiHome className='mr-2 text-3xl'></HiHome> Home</Link> </li>
                 <li className='list-none py-2 rounded-lg pl-4 btn-ghost'> <Link className='flex items-center'> <HiComputerDesktop className='mr-2 text-3xl'></HiComputerDesktop> Media</Link> </li>

@@ -24,7 +24,7 @@ const MediaPost = () => {
         const date = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
         // console.log(date, time)
 
-        return date, time
+        return { date, time }
     }
 
     const imgHostKey = process.env.REACT_APP_imgbb_key;

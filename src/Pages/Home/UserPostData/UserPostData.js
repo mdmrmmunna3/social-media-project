@@ -1,16 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { FaRegThumbsUp } from "react-icons/fa";
 import { IoBookmarkOutline, IoChatboxOutline, IoShareSocialOutline } from "react-icons/io5";
 
 
 const UserPostData = () => {
-    const { user } = useContext(AuthContext);
+
     const postedDatas = useLoaderData();
 
     return (
-        <section>
+        <section className='mt-6'>
             {
                 postedDatas.map(postData => <div key={postData?._id}>
                     <div className="flex flex-col max-w-lg p-6 space-y-6 overflow-hidden rounded-lg shadow-md dark:bg-gray-900 dark:text-gray-100">
@@ -18,7 +17,7 @@ const UserPostData = () => {
                             <img alt="" src={postData?.authorImg} className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500" />
                             <div className="flex flex-col space-y-1">
                                 <Link className="text-sm font-semibold">{postData?.authorName}</Link>
-                                <span className="text-sm dark:text-gray-400">{postData?.postTime}</span>
+                                <span className="text-sm dark:text-gray-400">{`${postData?.postTime?.time}, ${postData?.postTime?.date}`}</span>
                             </div>
                         </div>
                         <p>{postData?.mediaText?.slice(0, 20)}... <Link className='text-orange-400 hover:text-orange-600'>Read More</Link> </p>
@@ -42,9 +41,11 @@ const UserPostData = () => {
                                 </button>
                                 <button type="button" className="flex items-center p-1 space-x-1.5">
                                     <IoBookmarkOutline></IoBookmarkOutline>
-
                                 </button>
                             </div>
+                        </div>
+                        <div>
+                        <textarea className="textarea textarea-success w-full h-10 text-xl" placeholder="Write an answer..."></textarea>
                         </div>
                     </div>
                 </div>)
